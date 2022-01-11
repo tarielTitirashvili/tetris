@@ -1,0 +1,9 @@
+.app{
+  background-image: url(./images/background.jpg);
+  background-position: cover;
+  background-repeat: repeat;
+  width: 96%;
+  height: 95vh;
+  padding-left: 4%;
+  padding-top: 5vh;
+}

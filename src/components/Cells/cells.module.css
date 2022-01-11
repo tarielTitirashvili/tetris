@@ -1,0 +1,11 @@
+.container{
+  border: solid yellow 2px;
+  display: flex;
+  flex-wrap: wrap;
+  height: 600px;
+  width: 50%;
+}
+.wrapper{
+  display: flex;
+  width: 100%;
+}
