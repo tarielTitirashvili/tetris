@@ -2,7 +2,7 @@ import React, {useEffect} from 'react'
 import Board from './Board'
 import { TETRA_ELEMENTS } from '../../constants'
 
-export default function GameLogic(props) {
+export default function MovingLogics(props) {
   useEffect(() => {
     window.addEventListener('keydown',handleUserKeyPress)
     return () =>window.removeEventListener('keydown', handleUserKeyPress)
@@ -16,7 +16,7 @@ export default function GameLogic(props) {
       let v = props.elemVariant
       if (keyCode === 90 ||keyCode === 38) {
         let allVariants = TETRA_ELEMENTS[props.randomElementNum].length-1
-        if(TETRA_ELEMENTS[props.randomElementNum].length!==1){  
+        if(TETRA_ELEMENTS[props.randomElementNum].length!==1){
           if(allVariants>props.elemVariant){
             if(checkNewVariant(props.randomElementNum, props.elemVariant, props.newBoard, props.vertical, props.horizontal, props.nextVariant)){
                 props.setNewBoard(props.dropNewChunk(props.horizontal, props.vertical, true, props.newBoard))
@@ -28,8 +28,8 @@ export default function GameLogic(props) {
                 props.setNewBoard(props.dropNewChunk(props.horizontal, props.vertical, true, props.newBoard))
                 props.setElemVariant(0)
               }
-          } 
-        }else{}
+          }
+        }
       }else if(keyCode === 37){
         if((hor-1)>=0){
           if(checkWayHorizontal(keyCode, props.horizontal, props.vertical, props.elemVariant, props.randomElementNum, props.board)){
@@ -56,54 +56,39 @@ export default function GameLogic(props) {
     for (let h = 0; h<=elemHeight; h++){
       for (let w = 0; w<=elemWidth; w++){
         let test = TETRA_ELEMENTS[randomElem][elemVariant][h][w]
-        if(test ===1){
-          if(keyCode === 39){
-            maxH = w
-          }else if(keyCode === 37){
-            maxH = w
-            w=elemWidth
-          }
+        if(test ===1)if(keyCode === 39){
+          maxH = w
+        }else if(keyCode === 37){
+          maxH = w
+          w=elemWidth
         }
       }
       positions.push(maxH)
       maxH=0
     }
-    if(keyCode===39){
-      for(let h=vertical; h<(vertical+elemHeight+1);h++){
-        let tester = board[h][hor+positions[maxH]+1]
-        console.log(h)
-        if(tester===1){
-          return false
-        }
-        maxH++
-      }
+    if(keyCode===39)for(let h=vertical; h<(vertical+elemHeight+1);h++){
+      let tester = board[h][hor+positions[maxH]+1]
+      console.log(h)
+      if(tester===1)return false
+      maxH++
     }
-    if(keyCode===37){
-      for(let h=vertical; h<(vertical+elemHeight+1);h++){
-        let tester = board[h][hor+positions[maxH]-1]
-        console.log(h)
-        if(tester===1){
-          return false
-        }
-        maxH++
-      }
+    if(keyCode===37)for(let h=vertical; h<(vertical+elemHeight+1);h++){
+      let tester = board[h][hor+positions[maxH]-1]
+      console.log(h)
+      if(tester===1)return false
+      maxH++
     }
     return true
   }
   function checkNewVariant(randomNum, elemVariant, newBoard, vertical, hor, nextVariant) {
     let paintedElem = [] 
-    
     let horizontalPos = TETRA_ELEMENTS[randomNum][nextVariant][0].length
     let hight = TETRA_ELEMENTS[randomNum][nextVariant].length
-    if((hight+vertical)>=newBoard.length)return false
-    if((horizontalPos+hor)>newBoard[0].length){
-      return false
-    }
+    if((hight+vertical)>newBoard.length)return false
+    if((horizontalPos+hor)>newBoard[0].length)return false
     for(let b=0; b<TETRA_ELEMENTS[randomNum][elemVariant].length; b++){
       for(let l=0; l<TETRA_ELEMENTS[randomNum][elemVariant][0].length; l++){
-        if(TETRA_ELEMENTS[randomNum][elemVariant][b][l]===1){
-          paintedElem.push([b,l])
-        }
+        if(TETRA_ELEMENTS[randomNum][elemVariant][b][l]===1)paintedElem.push([b,l])
       }
     }
     for(let h=0; h<TETRA_ELEMENTS[randomNum][nextVariant].length; h++){
@@ -112,9 +97,7 @@ export default function GameLogic(props) {
           if(newBoard[vertical+h][hor+w]===1){
             let test = false
             for(let i=0; i<paintedElem.length; i++){
-              if(paintedElem[i][0]===h && paintedElem[i][1]===w){
-                test = true
-              }
+              if(paintedElem[i][0]===h && paintedElem[i][1]===w)test = true
             }
             if(!test)return false
           }

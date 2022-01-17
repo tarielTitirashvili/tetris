@@ -25,16 +25,11 @@ function App() {
   const [nextVariant, setNextVariant] = useState(0)
   const [lose, setLose] = useState(false)
   function setNextVariantFN(randomNum, elemVariant) {
-    if(elemVariant>=(TETRA_ELEMENTS[randomNum].length-1)){
-      setNextVariant(0)
-    }else if(elemVariant < TETRA_ELEMENTS[randomNum].length){
-      setNextVariant(elemVariant+1)
-    }
+    if(elemVariant>=(TETRA_ELEMENTS[randomNum].length-1))setNextVariant(0)
+    else if(elemVariant < TETRA_ELEMENTS[randomNum].length)setNextVariant(elemVariant+1)
   }
   useEffect(()=>{
-    if(randomElementNum!==null){
-      setNextVariantFN(randomElementNum, elemVariant)
-    }
+    if(randomElementNum!==null)setNextVariantFN(randomElementNum, elemVariant)
   },[elemVariant, randomElementNum])
   console.log(lose)
   return (
