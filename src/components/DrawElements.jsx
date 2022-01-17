@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react'
-import GameLogic from './Cells/MovingLogics'
+import GameLogic from './board/MovingLogics'
 import Display from './display/Display'
 import StartButton from './startGame/StartButton'
 import css from './tetris.module.css'
