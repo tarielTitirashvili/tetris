@@ -8,8 +8,6 @@ export default function Board(props) {
   function calcHeight(num) {
     return `${600 / num}px-2px`
   }
-  console.log(props.board)
-  console.log('render')
   return (
     <div className={css.container}>
       {props.board.map((cells, index) => {
@@ -24,7 +22,7 @@ export default function Board(props) {
                     width: calcWidth(cells.length),
                     height: calcHeight(cells.length),
                     display: 'block',
-                    border: 'solid black 1px'
+                    border: 'solid black 0.3px'
                   }}
                 >
                 </div>

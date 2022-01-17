@@ -8,7 +8,8 @@ export const TETRA_ELEMENTS =[
   [
     [
       [1],[1],[1],[1],
-    ],[
+    ],
+    [
       [1,1,1,1]
     ]
   ],

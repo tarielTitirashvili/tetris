@@ -5,13 +5,28 @@ export default function StartButton(props) {
 
   const handleClick = () => {
     props.setStartGame(!props.startGame)
+    if(props.lose){
+      props.setBoard([
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0],
+        [0,0,0,0,0,0,0,0,0,0,0,0]
+      ])
+        props.setLose(false)
+    }
   }
   return (
     <div>
-        <h1>{props.vertical}</h1>
-
       <button className={css.start_game} onClick={()=>handleClick()}>
-          {props.startGame? 'pause' : 'START GAME' }
+          {props.startGame? props.lose?'RESTART' : 'PAUSE' : 'START' }
       </button>
     </div>
   )
