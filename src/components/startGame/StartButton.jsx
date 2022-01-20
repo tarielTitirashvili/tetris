@@ -20,7 +20,8 @@ export default function StartButton(props) {
         [0,0,0,0,0,0,0,0,0,0,0,0],
         [0,0,0,0,0,0,0,0,0,0,0,0]
       ])
-        props.setLose(false)
+      props.setLose(false)
+      props.setScore(0)
     }
   }
   return (
