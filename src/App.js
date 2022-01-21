@@ -64,6 +64,7 @@ function App() {
         />
       </div>:<div>
       <Tetris
+        generateBoard = {generateBoard}
         level = {level}
         rows = {rows}
         column = {column}

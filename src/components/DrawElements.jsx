@@ -184,6 +184,7 @@ export default function DrawElements(props) {
       <div className={css.container}>
         <Display score = {props.score} text = "score" />
         <StartButton
+          generateBoard = {props.generateBoard}
           setScore = {props.setScore}
           setLose = {props.setLose}
           setBoard = {props.setNewBoard}
