@@ -7,3 +7,9 @@
   padding-left: 4%;
   padding-top: 5vh;
 }
+.settingsContainer{
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 90vh;
+}

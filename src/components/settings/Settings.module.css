@@ -1,0 +1,48 @@
+.settingsCard{
+  width: 50vw;
+  height: 30vh;
+  padding: 1%;
+  background-color: rgba(248, 240, 255, 0.527);
+  border-radius: 30px;
+  font-size: 16px;
+  font-weight: 500;
+}
+.numberInput{
+  width: 40px;
+}
+.selectorButtons{
+  width: 7%;
+  padding: 5px;
+  margin-left: 5px;
+  margin-right: 5px;
+  margin-bottom: 5px;
+  background-color: rgba(255, 196, 0, 0.719);
+  border-radius: 15%;
+  border: none;
+  font-size: 22px;
+}
+.settingContainer{
+  width: 100%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.goToGameContainer{
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-top: 10px;
+}
+.goToGame{
+  padding: 10px 7px;
+  background-color: rgba(255, 196, 0, 0.719);
+  font-size: 16px;
+  font-weight: 500;
+  border-radius: 25%;
+  border: none;
+}
+.selector{
+  font-size: 18px;
+  padding: 5px;
+}

@@ -2,13 +2,12 @@ import React, { useState, useEffect, useRef } from 'react'
 import GameLogic from './board/MovingLogics'
 import Display from './display/Display'
 import StartButton from './startGame/StartButton'
-import css from './tetris.module.css'
+import css from './drawElements.module.css'
 import { generateRandomElement} from '../App'
 import { TETRA_ELEMENTS } from '../constants'
 
 export default function DrawElements(props) {
   const [startGame, setStartGame] = useState(false)
-  const [vertical, setVertical] = useState(0)
   let newBoard = [
     [...props.board[0]],
     [...props.board[1]],
@@ -25,7 +24,7 @@ export default function DrawElements(props) {
   ]
   let timerRef = useRef()
   useEffect(()=>{
-    if(vertical===0){
+    if(props.vertical===0){
       for(let k=0; k<props.board.length; k++){
         let counter = 0
         for(let p=0; p<props.board[k].length; p++){
@@ -38,28 +37,28 @@ export default function DrawElements(props) {
           newBoard.splice(k,1)
           newBoard.unshift([0,0,0,0,0,0,0,0,0,0,0,0])
           props.setNewBoard(newBoard)
-          setVertical(0)
+          props.setVertical(0)
         }
         counter = 0
       }
     }
     if(props.randomElementNum!==null){
-      if(checkWay(props.horizontal, vertical, props.board, props.elemVariant, props.randomElementNum)){
-        props.setNewBoard(dropNewChunk(props.horizontal, vertical, false, newBoard,'move'))
+      if(checkWay(props.horizontal, props.vertical, props.board, props.elemVariant, props.randomElementNum)){
+        props.setNewBoard(dropNewChunk(props.horizontal, props.vertical, false, newBoard,'move'))
       }
     }
-  }, [vertical])
+  }, [props.vertical])
   useEffect(() => {
     if(props.randomElementNum!==null){
-        props.setNewBoard(dropNewChunk(props.horizontal, vertical, false, newBoard,'move'))
-        if((vertical+TETRA_ELEMENTS[props.randomElementNum][props.elemVariant].length)===newBoard.length)setVertical(0)
+        props.setNewBoard(dropNewChunk(props.horizontal, props.vertical, false, newBoard,'move'))
+        if((props.vertical+TETRA_ELEMENTS[props.randomElementNum][props.elemVariant].length)===newBoard.length)props.setVertical(0)
     }
   }, [props.elemVariant])
   useEffect(() => {
     if(startGame && !props.lose){
       timerRef.current = setInterval(() => {
-          setVertical(prevCount => prevCount + 1)
-      }, 500)
+        props.setVertical(prevCount => prevCount + 1)
+      }, props.level.timing)
     }else if(!startGame || props.lose){
       clearInterval(timerRef.current)
     } 
@@ -68,7 +67,7 @@ export default function DrawElements(props) {
     props.setRAndomElem(generateRandomElement())
   }, [])
   function reset() {
-    if(vertical === 0)props.setLose(true)
+    if(props.vertical === 0)props.setLose(true)
     props.setRAndomElem(generateRandomElement())
     props.setElemVariant(0)
     props.setHor(5)    
@@ -80,7 +79,7 @@ export default function DrawElements(props) {
     let hor = horizontal
     let maxH = 0
     if((TETRA_ELEMENTS[randomElem][elemVariant].length+vertical) >= props.board.length){
-      setVertical(0)
+      props.setVertical(0)
       reset()
     }
     for (let w = 0; w<=elemWidth; w++) {
@@ -94,7 +93,7 @@ export default function DrawElements(props) {
       let test = board[vertical+positions[maxH]][check]
       maxH++
       if(test === 1){
-        setVertical(0)
+        props.setVertical(0)
         reset(vertical)
         return false
       }
@@ -172,8 +171,8 @@ export default function DrawElements(props) {
         setHor = {props.setHor}
         horizontal = {props.horizontal}
         nextVariant = {props.nextVariant}
-        setVertical = {setVertical}
-        vertical = {vertical}
+        setVertical = {props.setVertical}
+        vertical = {props.vertical}
         randomElementNum = {props.randomElementNum}
         dropNewChunk = {dropNewChunk}
         newBoard = {newBoard}
@@ -192,6 +191,9 @@ export default function DrawElements(props) {
           startGame = {startGame}
           setStartGame = {setStartGame}
         />
+          <button className={css.changeSettings} onClick={()=>props.setSettings(true)}>
+            change Settings
+          </button>
       </div>
     </div>
   )
