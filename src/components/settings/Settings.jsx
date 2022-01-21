@@ -3,7 +3,6 @@ import { LEVELS } from '../../constants'
 import css from './Settings.module.css'
 
 export default function settings(props) {
-  console.log(props.level)
   function onSortLevelSelect(e){
     if(e.target.value === "level")props.setLevel(undefined)
     props.setLevel(LEVELS[e.target.value])
@@ -21,7 +20,7 @@ export default function settings(props) {
     if(props.column<22)props.setColumn(prev=>prev+1)
   }
   function onGoToGame() {
-    if(props.level !== null)props.setSettings(false)
+    if(props.level !== undefined)props.setSettings(false)
   }
 
   return <div>

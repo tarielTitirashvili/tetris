@@ -8,20 +8,16 @@ import { TETRA_ELEMENTS } from '../constants'
 
 export default function DrawElements(props) {
   const [startGame, setStartGame] = useState(false)
-  let newBoard = [
-    [...props.board[0]],
-    [...props.board[1]],
-    [...props.board[2]],
-    [...props.board[3]],
-    [...props.board[4]],
-    [...props.board[5]],
-    [...props.board[6]],
-    [...props.board[7]],
-    [...props.board[8]],
-    [...props.board[9]],
-    [...props.board[10]],
-    [...props.board[11]],
-  ]
+  function generateNewBoard() {
+    let generatedBoard = []
+    if(22>=props.column && props.column>=12 && 12<=props.rows && props.rows<=22){
+      for(let i=0; i<props.column; i++){
+        generatedBoard.push(props.board[i])
+      }
+    }
+    return generatedBoard
+  }
+  let newBoard = generateNewBoard()
   let timerRef = useRef()
   useEffect(()=>{
     if(props.vertical===0){
@@ -33,9 +29,13 @@ export default function DrawElements(props) {
           }
         }
         if(counter === props.board[k].length){
+          let newLine = []
+          for(let i=0; i<props.rows; i++){
+            newLine.push(0)
+          }
           props.setScore(prev=>prev+1)
           newBoard.splice(k,1)
-          newBoard.unshift([0,0,0,0,0,0,0,0,0,0,0,0])
+          newBoard.unshift(newLine)
           props.setNewBoard(newBoard)
           props.setVertical(0)
         }
