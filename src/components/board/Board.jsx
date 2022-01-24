@@ -1,5 +1,5 @@
 import React from 'react'
-import css from './cells.module.css'
+import css from './board.module.css'
 
 export default function Board(props) {
   function calcWidth(num) {

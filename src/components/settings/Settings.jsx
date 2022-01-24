@@ -26,13 +26,13 @@ export default function settings(props) {
   return <div>
     <div className={css.settingsCard}>
       <div className={css.settingContainer}>
-        select rows here 
+        ROWS: 
         <button className={css.selectorButtons} onClick={removeRow}> - </button> 
           {props.rows}
         <button className={css.selectorButtons} onClick={addRow}> + </button>
         </div>
         <div className={css.settingContainer}>
-          select columns here 
+          COLUMNS:
           <button className={css.selectorButtons} onClick={removeColumn}> - </button> 
             {props.column} 
           <button className={css.selectorButtons} onClick={addColumn}> + </button>
@@ -51,7 +51,7 @@ export default function settings(props) {
         </div>
         <div className={css.goToGameContainer}>
           <button className={css.goToGame} onClick={onGoToGame}>
-            go to game
+            play game
           </button>
         </div>
     </div>
