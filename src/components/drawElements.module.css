@@ -13,3 +13,16 @@
   border-radius: 25%;
   border: none;
 }
+.tetris_wrapper{
+  display: flex;
+}
+@media screen and (max-width: 768px){
+  .tetris_wrapper{
+    display: block;
+  }
+  .container{
+    align-items: center;
+    justify-content: space-around;
+    flex-direction: row;
+  }
+}

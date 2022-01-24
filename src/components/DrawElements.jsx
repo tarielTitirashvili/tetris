@@ -166,21 +166,7 @@ export default function DrawElements(props) {
     }
   }
   return (
-    <div style={{display: 'flex'}} >
-      <GameLogic
-        setHor = {props.setHor}
-        horizontal = {props.horizontal}
-        nextVariant = {props.nextVariant}
-        setVertical = {props.setVertical}
-        vertical = {props.vertical}
-        randomElementNum = {props.randomElementNum}
-        dropNewChunk = {dropNewChunk}
-        newBoard = {newBoard}
-        setElemVariant = {props.setElemVariant}
-        elemVariant = {props.elemVariant}
-        setNewBoard = {props.setNewBoard}
-        board = {props.board}
-      />
+    <div className={css.tetris_wrapper}>
       <div className={css.container}>
         <Display score = {props.score} text = "score" />
         <StartButton
@@ -196,6 +182,20 @@ export default function DrawElements(props) {
             change Settings
           </button>
       </div>
+      <GameLogic
+        setHor = {props.setHor}
+        horizontal = {props.horizontal}
+        nextVariant = {props.nextVariant}
+        setVertical = {props.setVertical}
+        vertical = {props.vertical}
+        randomElementNum = {props.randomElementNum}
+        dropNewChunk = {dropNewChunk}
+        newBoard = {newBoard}
+        setElemVariant = {props.setElemVariant}
+        elemVariant = {props.elemVariant}
+        setNewBoard = {props.setNewBoard}
+        board = {props.board}
+      />
     </div>
   )
 }

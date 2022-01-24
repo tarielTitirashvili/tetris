@@ -9,28 +9,31 @@ export default function Board(props) {
     return `${600 / num}px-2px`
   }
   return (
-    <div className={css.container}>
-      {props.board.map((cells, index) => {
-        return (
-          <div className={css.wrapper} key={index}>
-            {cells.map((cell, index) => {
-              return (
-                <div
-                  key={index}
-                  style={{
-                    backgroundColor: cell ? 'rgb(225, 0, 255)' : 'yellow',
-                    width: calcWidth(cells.length),
-                    height: calcHeight(cells.length),
-                    display: 'block',
-                    border: 'solid black 0.3px'
-                  }}
-                >
-                </div>
-              )
-            })}
-          </div>
-        )
-      })}
+    <div className={css.board_container}>
+      <div className={css.container}>
+        {props.board.map((cells, index) => {
+          return (
+            <div className={css.wrapper} key={index}>
+              {cells.map((cell, index) => {
+                return (
+                  <div
+                    key={index}
+                    style={{
+                      backgroundColor: cell ? 'rgb(225, 0, 255)' : 'yellow',
+                      width: calcWidth(cells.length),
+                      height: calcHeight(cells.length),
+                      display: 'block',
+                      border: 'solid black 0.3px'
+                    }}
+                  >
+                  </div>
+                )
+              })}
+            </div>
+          )
+        })}
+      </div>
     </div>
+
   )
 }
