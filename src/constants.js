@@ -103,3 +103,8 @@ export const LEVELS = [
   {timing: 500, name: 'hard', key: 2},
   {timing: 250, name: 'deadly', key: 3},
 ]
+
+export const LEFT_MOBILE_BUTTON = 'LEFT_MOBILE_BUTTON'
+export const RIGHT_MOBILE_BUTTON = 'RIGHT_MOBILE_BUTTON'
+export const UP_MOBILE_BUTTON = 'UP_MOBILE_BUTTON'
+export const DOWN_MOBILE_BUTTON = 'DOWN_MOBILE_BUTTON'

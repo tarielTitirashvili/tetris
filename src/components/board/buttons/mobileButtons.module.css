@@ -1,0 +1,19 @@
+.polygon_buttons{
+  fill: grey;
+  fill-rule: evenodd;
+  background-color: rgba(211, 211, 211, 0.26);
+}
+.svg_buttons{
+  padding: 4px;
+  background-color: rgba(211, 211, 211, 0.356);
+}
+.container{
+  display: none;
+}
+
+@media screen and (max-width: 768px) {
+  .container{
+    display: flex;
+    width: 186px;
+  }
+}

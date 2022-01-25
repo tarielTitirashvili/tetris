@@ -1,20 +1,23 @@
 import React, {useEffect} from 'react'
 import Board from './Board'
-import { TETRA_ELEMENTS } from '../../constants'
+import { DOWN_MOBILE_BUTTON, RIGHT_MOBILE_BUTTON, TETRA_ELEMENTS, UP_MOBILE_BUTTON } from '../../constants'
+import MobileButtons from './buttons/MobileButtons';
+import { LEFT_MOBILE_BUTTON } from './../../constants';
 
 export default function MovingLogics(props) {
   useEffect(() => {
     window.addEventListener('keydown',handleUserKeyPress)
     return () =>window.removeEventListener('keydown', handleUserKeyPress)
   })
-  const handleUserKeyPress = event => {
-    const { key, keyCode } = event
+  const handleUserKeyPress = (event, button) => {
+    console.log(event)
+    const { keyCode } = event
     if(props.randomElementNum!==null){
       let hor = props.horizontal
       let maxHor = props.board[0].length
       let elemWidth = TETRA_ELEMENTS[props.randomElementNum][props.elemVariant][0].length
       let v = props.elemVariant
-      if (keyCode === 90 ||keyCode === 38) {
+      if (keyCode === 90 || keyCode === 38 || button === UP_MOBILE_BUTTON) {
         let allVariants = TETRA_ELEMENTS[props.randomElementNum].length-1
         if(TETRA_ELEMENTS[props.randomElementNum].length!==1){
           if(allVariants>props.elemVariant){
@@ -30,21 +33,21 @@ export default function MovingLogics(props) {
               }
           }
         }
-      }else if(keyCode === 37){
+      }else if(keyCode === 37 || button ===LEFT_MOBILE_BUTTON ){
         if((hor-1)>=0){
           if(checkWayHorizontal(keyCode, props.horizontal, props.vertical, props.elemVariant, props.randomElementNum, props.board)){
             props.setNewBoard(props.dropNewChunk(props.horizontal, props.vertical, true, props.newBoard,'left'))
             props.setHor(hor-1)
           }
         }
-      }else if(keyCode === 39){
+      }else if(keyCode === 39 || button === RIGHT_MOBILE_BUTTON){
         if((hor+elemWidth+1)<=maxHor){
           if(checkWayHorizontal(keyCode, props.horizontal, props.vertical, props.elemVariant, props.randomElementNum, props.board)){
             props.setNewBoard(props.dropNewChunk(props.horizontal, props.vertical, true, props.newBoard, 'right'))
             props.setHor(hor+1)
           }
         }
-      }else if(keyCode === 40)props.setVertical(prev=>prev+1)
+      }else if(keyCode === 40 || button === DOWN_MOBILE_BUTTON)props.setVertical(prev=>prev+1)
     }
   }
   function checkWayHorizontal(keyCode, horizontal, vertical, elemVariant, randomElem, board) {
@@ -109,6 +112,9 @@ export default function MovingLogics(props) {
   return (
     <>
       <Board board={props.board} />
+      <div style={{display: 'flex', justifyContent: 'center',paddingTop:'30px'}}>
+        <MobileButtons handleUserKeyPress = {handleUserKeyPress} />
+      </div>
     </>
   )
 }
