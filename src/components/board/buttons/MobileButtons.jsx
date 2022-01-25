@@ -10,7 +10,7 @@ import {
 export default function MobileButtons(props) {
   return(
     <div className={css.container}  >
-     <button onClick={()=>props.handleUserKeyPress({keyCode:null}, LEFT_MOBILE_BUTTON)} className={css.svg_buttons}>
+     <button onClick={()=>props.handleUserKeyPress({keyCode:37}, LEFT_MOBILE_BUTTON)} className={css.svg_buttons}>
           <svg  width='60' height='60'>
             <polygon
              points='60,0 0,30 60,60'
@@ -36,7 +36,7 @@ export default function MobileButtons(props) {
           </svg>
         </button>
       </div>
-      <button onClick={()=>props.handleUserKeyPress({keyCode:null}, RIGHT_MOBILE_BUTTON)} className={css.svg_buttons}>
+      <button onClick={()=>props.handleUserKeyPress({keyCode:39}, RIGHT_MOBILE_BUTTON)} className={css.svg_buttons}>
           <svg  width='60' height='60'>
             <polygon
              points='0,0 0,60 60,30'
