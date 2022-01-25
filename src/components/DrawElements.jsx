@@ -7,7 +7,6 @@ import { generateRandomElement} from '../App'
 import { TETRA_ELEMENTS } from '../constants'
 
 export default function DrawElements(props) {
-  const [startGame, setStartGame] = useState(false)
   function generateNewBoard() {
     let generatedBoard = []
     if(22>=props.column && props.column>=12 && 12<=props.rows && props.rows<=22){
@@ -18,7 +17,6 @@ export default function DrawElements(props) {
     return generatedBoard
   }
   let newBoard = generateNewBoard()
-  let timerRef = useRef()
   useEffect(()=>{
     if(props.vertical===0){
       for(let k=0; k<props.board.length; k++){
@@ -54,15 +52,6 @@ export default function DrawElements(props) {
         if((props.vertical+TETRA_ELEMENTS[props.randomElementNum][props.elemVariant].length)===newBoard.length)props.setVertical(0)
     }
   }, [props.elemVariant])
-  useEffect(() => {
-    if(startGame && !props.lose){
-      timerRef.current = setInterval(() => {
-        props.setVertical(prevCount => prevCount + 1)
-      }, props.level.timing)
-    }else if(!startGame || props.lose){
-      clearInterval(timerRef.current)
-    } 
-  }, [startGame, props.lose])
   useEffect(() => {
     props.setRAndomElem(generateRandomElement())
   }, [])
@@ -165,6 +154,10 @@ export default function DrawElements(props) {
       }
     }
   }
+  function changeSettings() {
+    props.setSettings(true)
+    props.setVertical(0)
+  }
   return (
     <div className={css.tetris_wrapper}>
       <div className={css.container}>
@@ -175,10 +168,10 @@ export default function DrawElements(props) {
           setLose = {props.setLose}
           setBoard = {props.setNewBoard}
           lose = {props.lose}
-          startGame = {startGame}
-          setStartGame = {setStartGame}
+          startGame = {props.startGame}
+          setStartGame = {props.setStartGame}
         />
-          <button className={css.changeSettings} onClick={()=>props.setSettings(true)}>
+          <button className={css.changeSettings} onClick={changeSettings}>
             change Settings
           </button>
       </div>

@@ -1,4 +1,4 @@
-import { useState, useEffect } from 'react'
+import { useState, useEffect, useRef } from 'react'
 import css from './App.module.css'
 import Tetris from './components/DrawElements'
 import { TETRA_ELEMENTS } from './constants';
@@ -6,6 +6,7 @@ import Settings from './components/settings/Settings';
 
 function App() {
   const [level, setLevel] = useState(undefined)
+  const [startGame, setStartGame] = useState(false)
   const [settings, setSettings] = useState(true)
   const [rows, setRows] = useState(12)
   const [column, setColumn] = useState(12)
@@ -33,13 +34,23 @@ function App() {
   const [score, setScore] = useState(0)
   const [nextVariant, setNextVariant] = useState(0)
   const [lose, setLose] = useState(false)
+  let timerRef = useRef()
   function setNextVariantFN(randomNum, elemVariant) {
     if(elemVariant>=(TETRA_ELEMENTS[randomNum].length-1))setNextVariant(0)
     else if(elemVariant < TETRA_ELEMENTS[randomNum].length)setNextVariant(elemVariant+1)
   }
+  useEffect(() => {
+    if(startGame && !lose && !settings){
+      timerRef.current = setInterval(() => {
+        setVertical(prevCount => prevCount + 1)
+      }, level.timing)
+    }else if(!startGame || lose || settings){
+      clearInterval(timerRef.current)
+    } 
+  }, [startGame, lose, settings])
   useEffect(()=>{
     setBoard(generateBoard())
-  },[column, rows])
+  },[column, rows, settings])
   useEffect(()=>{
     let startHorizontalPos = Math.floor(rows/2)-1 
     setHorizontal(startHorizontalPos)
@@ -64,6 +75,8 @@ function App() {
         />
       </div>:<div>
       <Tetris
+        startGame = {startGame}
+        setStartGame = {setStartGame}
         generateBoard = {generateBoard}
         level = {level}
         rows = {rows}
@@ -83,6 +96,7 @@ function App() {
         horizontal = {horizontal}
         setHor = {setHorizontal}
         nextVariant = {nextVariant}
+        settings = {settings}
         setSettings = {setSettings}
       />
       </div>
