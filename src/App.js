@@ -42,7 +42,10 @@ function App() {
   useEffect(() => {
     if(startGame && !lose && !settings){
       timerRef.current = setInterval(() => {
-        setVertical(prevCount => prevCount + 1)
+        setVertical(prevCount => {
+          console.log(prevCount)
+          return prevCount + 1
+        })
       }, level.timing)
     }else if(!startGame || lose || settings){
       clearInterval(timerRef.current)

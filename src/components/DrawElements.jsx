@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react'
+import React, { useEffect } from 'react'
 import GameLogic from './board/MovingLogics'
 import Display from './display/Display'
 import StartButton from './startGame/StartButton'
@@ -22,7 +22,7 @@ export default function DrawElements(props) {
       for(let k=0; k<props.board.length; k++){
         let counter = 0
         for(let p=0; p<props.board[k].length; p++){
-          if(props.board[k][p]===1){
+          if(props.board[k][p]!==0){
             counter++
           }
         }
@@ -73,7 +73,7 @@ export default function DrawElements(props) {
     }
     for (let w = 0; w<=elemWidth; w++) {
       for (let h = 0; h<=elemHeight; h++) {
-        if(TETRA_ELEMENTS[randomElem][elemVariant][h][w]===1)maxH = h
+        if(TETRA_ELEMENTS[randomElem][elemVariant][h][w]!==0)maxH = h
       }
       positions.push(maxH)
       maxH=0
@@ -81,7 +81,7 @@ export default function DrawElements(props) {
     for(let check=hor; check<=(hor+elemWidth); check++){
       let test = board[vertical+positions[maxH]][check]
       maxH++
-      if(test === 1){
+      if(test !== 0){
         props.setVertical(0)
         reset(vertical)
         return false
@@ -115,7 +115,7 @@ export default function DrawElements(props) {
       for (let c = 0; c <= props.board[k].length - 1; c++) {
         if(elemH === k){
           if (elemW === c){
-            if(TETRA_ELEMENTS[props.randomElementNum][props.elemVariant][counterElemH][countElemW]===1){
+            if(TETRA_ELEMENTS[props.randomElementNum][props.elemVariant][counterElemH][countElemW]!==0){
               newBoard[k][c] = TETRA_ELEMENTS[props.randomElementNum][props.elemVariant][counterElemH][countElemW]
             }
             if(countElemW<elemWidth){
@@ -140,7 +140,7 @@ export default function DrawElements(props) {
       for (let c = 0; c <= props.board[k].length - 1; c++){
         if(elemH === k){
           if (elemW === c){
-              if(TETRA_ELEMENTS[props.randomElementNum][props.elemVariant][counterElemH][countElemW] === 1)newBoard[k][c] = 0
+              if(TETRA_ELEMENTS[props.randomElementNum][props.elemVariant][counterElemH][countElemW] !== 0)newBoard[k][c] = 0
             if(countElemW<prevElemWidth){
               elemW++
               countElemW++
