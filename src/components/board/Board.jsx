@@ -2,6 +2,16 @@ import React from 'react'
 import css from './board.module.css'
 
 export default function Board(props) {
+  function generateColor(value) {
+    if(value === 'H') return 'red'
+    if(value === 'I') return 'green'
+    if(value === 'Z') return 'rgba(255, 0, 191)'
+    if(value === 'S') return 'blue'
+    if(value === 'P') return 'rgba(0, 247, 255)'
+    if(value === 'L') return 'rgba(255, 166, 0)'
+    if(value === 'T') return 'rgba(255, 0, 55)'
+    if(value === 0 )return 'black'
+  }
   function calcWidth(num) {
     return `${100/num}%`
   }
@@ -19,7 +29,7 @@ export default function Board(props) {
                   <div
                     key={index}
                     style={{
-                      backgroundColor: cell ? 'rgb(225, 0, 255)' : 'yellow',
+                      backgroundColor: generateColor(cell),
                       width: calcWidth(cells.length),
                       height: calcHeight(cells.length),
                       display: 'block',
