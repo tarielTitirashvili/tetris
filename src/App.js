@@ -10,7 +10,6 @@ function App() {
   const [settings, setSettings] = useState(true)
   const [rows, setRows] = useState(12)
   const [column, setColumn] = useState(12)
-  
   const [speed, setSpeed]  = useState()
   const [vertical, setVertical] = useState(0)
   function generateBoard(){
@@ -43,7 +42,6 @@ function App() {
     if(startGame && !lose && !settings){
       timerRef.current = setInterval(() => {
         setVertical(prevCount => {
-          console.log(prevCount)
           return prevCount + 1
         })
       }, level.timing)

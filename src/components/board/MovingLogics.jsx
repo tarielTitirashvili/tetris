@@ -10,7 +10,6 @@ export default function MovingLogics(props) {
     return () =>window.removeEventListener('keydown', handleUserKeyPress)
   })
   const handleUserKeyPress = (event, button) => {
-    console.log(event)
     const { keyCode } = event
     if(props.randomElementNum!==null){
       let hor = props.horizontal
