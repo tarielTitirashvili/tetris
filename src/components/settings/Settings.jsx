@@ -38,8 +38,8 @@ export default function settings(props) {
           <button className={css.selectorButtons} onClick={addColumn}> + </button>
         </div>
         <div className={css.goToGameContainer}>
+          LEVEL:
           <select value = {props.level?props.level.key:''} className = {css.selector} onChange = {(e)=>onSortLevelSelect(e)}>
-            <option defaultValue value = 'level' > level </option>
             {LEVELS.map((level) => {
               return (
                 <option value = {level.key} key={level.key}>

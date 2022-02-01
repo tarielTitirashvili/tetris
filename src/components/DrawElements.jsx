@@ -5,8 +5,11 @@ import StartButton from './startGame/StartButton'
 import css from './drawElements.module.css'
 import { generateRandomElement} from '../App'
 import { TETRA_ELEMENTS } from '../constants'
+import { useState } from 'react/cjs/react.development'
 
 export default function DrawElements(props) {
+  const [score, setScore] = useState(0)
+
   function generateNewBoard() {
     let generatedBoard = []
     if(22>=props.column && props.column>=12 && 12<=props.rows && props.rows<=22){
@@ -31,7 +34,7 @@ export default function DrawElements(props) {
           for(let i=0; i<props.rows; i++){
             newLine.push(0)
           }
-          props.setScore(prev=>prev+1)
+          setScore(prev=>prev+1)
           newBoard.splice(k,1)
           newBoard.unshift(newLine)
           props.setNewBoard(newBoard)
@@ -41,7 +44,7 @@ export default function DrawElements(props) {
       }
     }
     if(props.randomElementNum!==null){
-      if(checkWay(props.horizontal, props.vertical, props.board, props.elemVariant, props.randomElementNum)){
+      if(checkWayVertical(props.horizontal, props.vertical, props.board, props.elemVariant, props.randomElementNum)){
         props.setNewBoard(dropNewChunk(props.horizontal, props.vertical, false, newBoard,'move'))
       }
     }
@@ -61,15 +64,15 @@ export default function DrawElements(props) {
     props.setElemVariant(0)
     props.setHor(5)    
   }
-  function checkWay (horizontal, vertical, board, elemVariant, randomElem){
+  function checkWayVertical (horizontal, vertical, board, elemVariant, randomElem){
     let elemHeight = TETRA_ELEMENTS[randomElem][elemVariant].length -1
     let elemWidth = TETRA_ELEMENTS[randomElem][elemVariant][0].length-1 
     let positions = []
     let hor = horizontal
     let maxH = 0
-    if((TETRA_ELEMENTS[randomElem][elemVariant].length+vertical) >= props.board.length){
+    if((TETRA_ELEMENTS[randomElem][elemVariant].length+vertical) > props.board.length){
       props.setVertical(0)
-      reset()
+      return reset()
     }
     for (let w = 0; w<=elemWidth; w++) {
       for (let h = 0; h<=elemHeight; h++) {
@@ -161,10 +164,10 @@ export default function DrawElements(props) {
   return (
     <div className={css.tetris_wrapper}>
       <div className={css.container}>
-        <Display score = {props.score} text = "score" />
+        <Display score = {score} text = "score" />
         <StartButton
           generateBoard = {props.generateBoard}
-          setScore = {props.setScore}
+          setScore = {setScore}
           setLose = {props.setLose}
           setBoard = {props.setNewBoard}
           lose = {props.lose}

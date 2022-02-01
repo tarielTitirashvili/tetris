@@ -5,12 +5,11 @@ import { TETRA_ELEMENTS } from './constants';
 import Settings from './components/settings/Settings';
 
 function App() {
-  const [level, setLevel] = useState(undefined)
+  const [level, setLevel] = useState({timing: 1500, name: 'easy', key: 0})
   const [startGame, setStartGame] = useState(false)
   const [settings, setSettings] = useState(true)
   const [rows, setRows] = useState(12)
   const [column, setColumn] = useState(12)
-  const [speed, setSpeed]  = useState()
   const [vertical, setVertical] = useState(0)
   function generateBoard(){
     let generatedBoard = []
@@ -30,7 +29,6 @@ function App() {
   const [randomElementNum, setRandomElem] =useState(null)
   const [elemVariant, setElemVariant] = useState(0)
   const [horizontal, setHorizontal] = useState(5)
-  const [score, setScore] = useState(0)
   const [nextVariant, setNextVariant] = useState(0)
   const [lose, setLose] = useState(false)
   let timerRef = useRef()
@@ -59,6 +57,7 @@ function App() {
   useEffect(()=>{
     if(randomElementNum!==null)setNextVariantFN(randomElementNum, elemVariant)
   },[elemVariant, randomElementNum])
+  console.log('render')
   return (
     <div className={css.app}>
       {
@@ -70,8 +69,6 @@ function App() {
           setRows = {setRows}
           column = {column}
           setColumn = {setColumn}
-          speed  = {speed}
-          setSpeed= {setSpeed}
           setSettings = {setSettings}
         />
       </div>:<div>
@@ -86,8 +83,6 @@ function App() {
         setVertical = {setVertical}
         setLose = {setLose}
         lose = {lose}
-        score = {score}
-        setScore = {setScore} 
         board = {board} 
         setNewBoard = {setBoard} 
         randomElementNum = {randomElementNum} 

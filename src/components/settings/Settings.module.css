@@ -43,6 +43,7 @@
   border: none;
 }
 .selector{
+  margin-left: 5px;
   font-size: 18px;
   padding: 5px;
 }
