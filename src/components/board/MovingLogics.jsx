@@ -18,7 +18,7 @@ export default function MovingLogics(props) {
       let v = props.elemVariant
       if (keyCode === 90 || keyCode === 38 || button === UP_MOBILE_BUTTON) {
         let allVariants = TETRA_ELEMENTS[props.randomElementNum].length-1
-        if(TETRA_ELEMENTS[props.randomElementNum].length!==0){
+        if(TETRA_ELEMENTS[props.randomElementNum].length!==1){
           if(allVariants>props.elemVariant){
             if(checkNewVariant(props.randomElementNum, props.elemVariant, props.newBoard, props.vertical, props.horizontal, props.nextVariant)){
                 props.setNewBoard(props.dropNewChunk(props.horizontal, props.vertical, true, props.newBoard))

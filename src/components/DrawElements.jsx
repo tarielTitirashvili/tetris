@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import GameLogic from './board/MovingLogics'
+import MovingLogics from './board/MovingLogics'
 import Display from './display/Display'
 import StartButton from './startGame/StartButton'
 import css from './drawElements.module.css'
@@ -178,7 +178,8 @@ export default function DrawElements(props) {
             change Settings
           </button>
       </div>
-      <GameLogic
+      <MovingLogics
+        startGame = {props.startGame}
         setHor = {props.setHor}
         horizontal = {props.horizontal}
         nextVariant = {props.nextVariant}
